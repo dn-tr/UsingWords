@@ -1,24 +1,24 @@
-PRINT	'Dropping TextData'
+PRINT	'Dropping dbo.TextData'
 IF	object_id('dbo.TextData') IS NOT NULL
 	DROP	TABLE	dbo.TextData
 GO
 
-PRINT	'Dropping Sources'
+PRINT	'Dropping dbo.Sources'
 IF	object_id('dbo.Sources') IS NOT NULL
 	DROP	TABLE	dbo.Sources
 GO
 
-PRINT	'Dropping SourceKinds'
+PRINT	'Dropping dbo.SourceKinds'
 IF	object_id('dbo.SourceKinds') IS NOT NULL
 	DROP	TABLE	dbo.SourceKinds
 GO
 
-PRINT	'Dropping TextItems'
+PRINT	'Dropping dbo.TextItems'
 IF	object_id('dbo.TextItems') IS NOT NULL
 	DROP	TABLE	dbo.TextItems
 GO
 
-PRINT	'Dropping TextItemKinds'
+PRINT	'Dropping dbo.TextItemKinds'
 IF	object_id('dbo.TextItemKinds') IS NOT NULL
 	DROP	TABLE	dbo.TextItemKinds
 GO

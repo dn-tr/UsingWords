@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------------------
---	SELECT * FROM SourceKinds
-PRINT	'Creating reference book SourceKinds'
+--	SELECT * FROM dbo.SourceKinds
+PRINT	'Creating reference book dbo.SourceKinds'
 
-INSERT	INTO	SourceKinds
+INSERT	INTO	dbo.SourceKinds
 (	Name
 )
 SELECT	Name
@@ -14,46 +14,46 @@ UNION ALL	SELECT	'internet article'
 )	x
 WHERE	NOT EXISTS	
 	(	SELECT	1
-		FROM	SourceKinds	s
+		FROM	dbo.SourceKinds	s
 		WHERE	s.Name	= x.Name
 	)
 
 GO
 
 ----------------------------------------------------------------------------------
---	SELECT * FROM TextItemKinds
-PRINT	'Creating reference book TextItemKinds'
+--	SELECT * FROM dbo.TextItemKinds
+PRINT	'Creating reference book dbo.TextItemKinds'
 
-INSERT	INTO	TextItemKinds
+INSERT	INTO	dbo.TextItemKinds
 (	Name
 )
 SELECT	Name
 FROM	(	SELECT	'unknown' AS Name
 UNION ALL	SELECT	'word'
-UNION ALL	SELECT	'punctuation mark'
+UNION ALL	SELECT	'symbol'
 UNION ALL	SELECT	'number'
 )	x
 WHERE	NOT EXISTS	
 	(	SELECT	1
-		FROM	TextItemKinds	s
+		FROM	dbo.TextItemKinds	s
 		WHERE	s.Name	= x.Name
 	)
 
 GO
 
 ----------------------------------------------------------------------------------
---	SELECT * FROM Sources
-PRINT	'Creating zero row for Sources (Id=0)'
+--	SELECT * FROM dbo.Sources
+PRINT	'Creating zero row for dbo.Sources (Id=0)'
 
 IF	NOT EXISTS
 	(	SELECT	1
-		FROM	Sources
+		FROM	dbo.Sources
 		WHERE	Id	= 0
 	)
 BEGIN
-	SET IDENTITY_INSERT Sources ON
+	SET IDENTITY_INSERT dbo.Sources ON
 
-	INSERT	INTO	Sources
+	INSERT	INTO	dbo.Sources
 	(	Id	,
 		Name	,
 		Kind
@@ -62,29 +62,29 @@ BEGIN
 	(	0	,	
 		''	,
 		(	SELECT	Id
-			FROM	SourceKinds
+			FROM	dbo.SourceKinds
 			WHERE	Name = 'unknown' 
 		) 
 	)
 
-	SET IDENTITY_INSERT Sources OFF
+	SET IDENTITY_INSERT dbo.Sources OFF
 END
 
 GO
 
 ----------------------------------------------------------------------------------
---	SELECT * FROM TextItems
-PRINT	'Creating zero row for TextItems (Id=0)'
+--	SELECT * FROM dbo.TextItems
+PRINT	'Creating zero row for dbo.TextItems (Id=0)'
 
 IF	NOT EXISTS
 	(	SELECT	1
-		FROM	TextItems
+		FROM	dbo.TextItems
 		WHERE	Id	= 0
 	)
 BEGIN
-	SET IDENTITY_INSERT TextItems ON
+	SET IDENTITY_INSERT dbo.TextItems ON
 
-	INSERT	INTO	TextItems
+	INSERT	INTO	dbo.TextItems
 	(	Id	,
 		Item	,
 		Kind
@@ -93,27 +93,27 @@ BEGIN
 	(	0	,
 		''	,
 		(	SELECT	Id
-			FROM	TextItemKinds
+			FROM	dbo.TextItemKinds
 			WHERE	Name = 'unknown' 
 		) 
 	)
 
-	SET IDENTITY_INSERT TextItems OFF
+	SET IDENTITY_INSERT dbo.TextItems OFF
 END
 
 GO
 
 ----------------------------------------------------------------------------------
---	SELECT * FROM TextItems
-PRINT	'Adding punctuation marks to TextItems'
+--	SELECT * FROM dbo.TextItems
+PRINT	'Adding symbols to dbo.TextItems'
 
 DECLARE	@KindId	INT
 
 SELECT	@KindId	= Id
-FROM	TextItemKinds
-WHERE	Name = 'punctuation mark'
+FROM	dbo.TextItemKinds
+WHERE	Name = 'symbol'
 
-INSERT	INTO	TextItems
+INSERT	INTO	dbo.TextItems
 (	Item	,
 	Kind
 )
@@ -134,6 +134,7 @@ UNION	ALL	SELECT	'"'
 UNION	ALL	SELECT	'«'
 UNION	ALL	SELECT	'»'
 UNION	ALL	SELECT	'`'
+UNION	ALL	SELECT	'’'
 UNION	ALL	SELECT	'~'
 UNION	ALL	SELECT	'@'
 UNION	ALL	SELECT	'#'
@@ -154,30 +155,30 @@ UNION	ALL	SELECT	'='
 )	x
 WHERE	NOT EXISTS	
 	(	SELECT	1
-		FROM	TextItems	s
+		FROM	dbo.TextItems	s
 		WHERE	s.Item	= x.Item
 	)
 
 GO
 
 ----------------------------------------------------------------------------------
---	SELECT * FROM TextData
-PRINT	'Creating zero row for TextData (Id=0)'
+--	SELECT * FROM dbo.TextData
+PRINT	'Creating zero row for dbo.TextData (Id=0)'
 
 IF	NOT EXISTS
 	(	SELECT	1
-		FROM	TextData
+		FROM	dbo.TextData
 		WHERE	Id	= 0
 	)
 BEGIN
-	SET IDENTITY_INSERT TextData ON
+	SET IDENTITY_INSERT dbo.TextData ON
 
-	INSERT	INTO	TextData
-	(	Id,	PrevId,	TextItemId,	Source	)
+	INSERT	INTO	dbo.TextData
+	(	Id,	PrevId,	TextItemId,	SourceId	)
 	VALUES	
 	(	0,	0,	0,		0	)
 
-	SET IDENTITY_INSERT TextData OFF
+	SET IDENTITY_INSERT dbo.TextData OFF
 END
 
 GO
