@@ -4,11 +4,15 @@ Using words in texts
 
 ## In future
 
-* Loading texts to DB
-* Getting some statistic by word
-* Finding similar words
-* Finding phrases by word 
-* Finding similar phrases
+- [ ] Loading texts to DB from different sources:
+  - [x] txt *(partly completed in test [QuickStartApp](https://github.com/dn-tr/UsingWords/tree/master/Sources/QuickStartApp) project)*
+  - [ ] pdf
+  - [ ] e-books: ebup, fb2, etc.
+  - [ ] parse html
+- [ ] Getting some statistic by word
+- [ ] Finding similar words
+- [ ] Finding phrases by word 
+- [ ] Finding similar phrases
 
 ### Planned to use
 
