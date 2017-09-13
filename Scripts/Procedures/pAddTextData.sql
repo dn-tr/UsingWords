@@ -32,7 +32,7 @@ WHERE	x.Item	= @Word
 
 IF	@TextItemId	IS NULL
 BEGIN
-	INSERT	INTO	TextItems
+	INSERT	INTO	dbo.TextItems
 	(	Item	,
 		Kind
 	)
