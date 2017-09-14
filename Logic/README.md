@@ -38,7 +38,7 @@ HeloWorld     _heloworld
               heloworld_
               1110000000  3/10 =  0.3
               
-              helloworld
+HelloWorld    helloworld
 HeloWord      __heloword
               _h_eloword
               _he_loword
