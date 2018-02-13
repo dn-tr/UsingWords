@@ -30,10 +30,17 @@ namespace QuickStartApp
 
         private void CompareWords()
         {
-            decimal res = 0;
+            object res = null;
 
-            if (!(string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrEmpty(textBox2.Text)))
-                res = WordsHelper.GetSimilarPercent(textBox1.Text.Trim(), textBox2.Text.Trim());
+            try
+            {
+                if (!(string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrEmpty(textBox2.Text)))
+                    res = WordsHelper.GetSimilarPercent(textBox1.Text.Trim(), textBox2.Text.Trim());
+            }
+            catch(Exception ex)
+            {
+                res = ex.Message;
+            }
 
             label3.Text = $"Result : {res}";
         }

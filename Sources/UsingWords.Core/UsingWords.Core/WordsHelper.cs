@@ -8,6 +8,9 @@ namespace UsingWords.Core
 {
     public static class WordsHelper
     {
+        /// <summary>
+        /// Return similar percent <see cref="https://github.com/dn-tr/UsingWords/tree/master/Logic#get-similar-percent"/>
+        /// </summary>
         public static decimal GetSimilarPercent(string word1, string word2, char emptyChar = '\0', bool ignoreCase = true, decimal defaultMinPercent = 0.1m)
         {
             string _word1 = ignoreCase ? word1.ToLower() : word1;
@@ -63,6 +66,9 @@ namespace UsingWords.Core
             return distVars.Max(a => a.Percent);
         }
 
+        /// <summary>
+        /// Adding empty char to word for get target lenght and adding this word to list
+        /// </summary>
         public static void AddEmptyChars(List<string> words, int targetLength, char emptyChar)
         {
             List<string> variants = new List<string>();
@@ -90,6 +96,9 @@ namespace UsingWords.Core
             words.AddRange(variants);
         }
 
+        /// <summary>
+        /// Compare two words by lettes and return "similar percent"
+        /// </summary>
         public static decimal CompareListChars(List<char> word1, List<char> word2)
         {
             int length = word1.Count();
